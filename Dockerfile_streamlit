@@ -37,5 +37,4 @@ COPY postgres ./postgres
 COPY app.py ./app.py
 
 ENV PYTHONPATH=/app
-# Docker compose overwrite this config to have only one Dockerfile
-CMD ["ls"]
+ENTRYPOINT ["poetry", "run", "python", "-m", "streamlit", "run", "app.py"]
