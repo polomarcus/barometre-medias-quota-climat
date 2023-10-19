@@ -8,6 +8,7 @@ services:
     entrypoint: ["poetry", "run", "pytest", "-v", "--cov", "test", "test/"]
     environment:
       ENV: docker
+      PYTHONPATH: /app
       POSTGRES_USER: user
       POSTGRES_DB: barometre
       POSTGRES_PASSWORD: password
@@ -86,7 +87,7 @@ services:
         condition: service_healthy
 
   postgres_db:
-    image: postgres:13.6
+    image: postgres:15
     ports:
       - 5432:5432
     volumes:

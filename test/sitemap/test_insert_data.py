@@ -31,17 +31,29 @@ def test_add_primary_key():
     expected_output = pd.DataFrame(
         [
             {
-                "id": "testpublication_name" + "testnews_title" + "2023-10-11 13:10:00",
                 "publication_name": "testpublication_name",
                 "news_title": "testnews_title",
                 "news_publication_date": pd.Timestamp("2023-10-11 13:10:00"),
+                "id": hash("testpublication_name" + "testnews_title" + "2023-10-11 13:10:00"),
             }
         ]
     )
 
     df["id"] = add_primary_key(df)
 
-    pd.testing.assert_frame_equal(expected_output, expected_output)
+    pd.testing.assert_frame_equal(expected_output, df)
+
+
+    df_fake = pd.DataFrame(
+    [
+        {
+            "fake_it": "testpublication_name",
+        }
+    ]
+    )
+    
+    df_fake["id"] = add_primary_key(df_fake)
+    assert df_fake['id'].values.take(0) == hash("empty")
 
 
 def test_transformation_from_dumps_to_table_entry():

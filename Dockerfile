@@ -24,6 +24,7 @@ WORKDIR /app
 ENV VIRTUAL_ENV=/app/.venv 
 ENV PATH="/app/.venv/bin:$PATH"
 ENV PATH="$PYENV_ROOT/bin:$PATH"
+ENV PYTHONPATH=/app
 
 COPY --from=builder ${VIRTUAL_ENV} ${VIRTUAL_ENV}
 
@@ -36,6 +37,5 @@ COPY quotaclimat ./quotaclimat
 COPY postgres ./postgres
 COPY app.py ./app.py
 
-ENV PYTHONPATH=/app
 # Docker compose overwrite this config to have only one Dockerfile
 CMD ["ls"]
