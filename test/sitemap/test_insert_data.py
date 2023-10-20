@@ -128,9 +128,10 @@ def test_insert_data_in_sitemap_table():
     insert_data_in_sitemap_table(df)
 
     # check the value is well existing
-    result = get_sitemap("testpublication_name_newtestnews_title2023-10-11 13:10:00")
+    primary_key = hash("testpublication_name_newtestnews_title2023-10-11 13:10:00")
+    result = get_sitemap(primary_key)
 
-    assert result.id == "testpublication_name_newtestnews_title2023-10-11 13:10:00"
+    assert result.id == primary_key
     assert result.publication_name == "testpublication_name_new"
     assert result.news_title == "testnews_title"
     assert result.download_date == pd.Timestamp("2023-10-11 13:11:00")
