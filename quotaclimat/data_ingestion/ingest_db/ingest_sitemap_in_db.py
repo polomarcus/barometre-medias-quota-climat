@@ -21,7 +21,6 @@ def run():
 
     create_tables()
     
-    exit()
     conn = connect_to_db()
     sitemap_list = get_sitemap_list().items()   
     logging.info("Going to parse %s" % (sitemap_list))
