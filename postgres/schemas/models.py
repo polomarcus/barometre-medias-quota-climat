@@ -67,7 +67,7 @@ def create_tables():
 def drop_tables():
     """Drop tables in the PostgreSQL database"""
 
-    logging.info("create sitemap table")
+    logging.warning("drop tables")
     try:
         engine = connect_to_db()
 

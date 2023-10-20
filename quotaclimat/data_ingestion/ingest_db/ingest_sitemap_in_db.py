@@ -6,7 +6,7 @@ import sys
 from postgres.insert_data import insert_data_in_sitemap_table
 from postgres.insert_existing_data_example import \
     transformation_from_dumps_to_table_entry
-from postgres.schemas.models import create_tables
+from postgres.schemas.models import create_tables, drop_tables
 
 
 from quotaclimat.data_ingestion.scrap_sitemap import \
@@ -18,6 +18,7 @@ from quotaclimat.data_ingestion.scrap_sitemap import \
 
 def run():
     logging.info("start")
+
     create_tables()
     sitemap_list = get_sitemap_list().items()   
     logging.info("Going to parse %s" % (sitemap_list))
