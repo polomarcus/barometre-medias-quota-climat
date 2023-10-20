@@ -4,9 +4,25 @@ import time
 import pandas as pd
 from sqlalchemy import DateTime
 from sqlalchemy.dialects.postgresql import insert
+import hashlib
 
 from postgres.database_connection import connect_to_db
 from postgres.schemas.models import sitemap_table
+
+def get_consistent_hash(my_pk):
+    # Convert the object to a string representation
+    obj_str = str(my_pk)
+
+    # Create a SHA-256 hash object
+    sha256 = hashlib.sha256()
+
+    # Update the hash object with the object's string representation
+    sha256.update(obj_str.encode('utf-8'))
+
+    # Get the hexadecimal representation of the hash
+    hash_value = sha256.hexdigest()
+
+    return hash_value
 
 # hash of publication name + title 
 def add_primary_key(df):
@@ -15,7 +31,7 @@ def add_primary_key(df):
             df["publication_name"]
             + df["news_title"]
             + df["news_publication_date"].dt.strftime("%Y-%m-%d %X")
-        ).apply(hash)
+        ).apply(get_consistent_hash)
     except (Exception) as error:
         logging.warning(error)
         return hash("empty") #  TODO improve - should be a None ?
@@ -51,7 +67,7 @@ def show_sitemaps_dataframe(df: pd.DataFrame):
     else:
         logging.warning("Duplicates to remove : %s out of %s" % (len(df_final), len(df)))
 
-def insert_data_in_sitemap_table(df: pd.DataFrame):
+def insert_data_in_sitemap_table(df: pd.DataFrame, conn):
     logging.info("Received %s elements", df.size)
 
     # primary key for the DB to avoid duplicate data
@@ -60,7 +76,7 @@ def insert_data_in_sitemap_table(df: pd.DataFrame):
 
     df = clean_data(df)
     logging.debug("Could  save%s" % (df.head(1).to_string()))
-    conn = connect_to_db()
+    
     try:
         logging.info("Schema before saving\n%s", df.dtypes)
         df.to_sql(
