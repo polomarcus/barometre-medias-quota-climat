@@ -13,13 +13,8 @@ import asyncio
 from quotaclimat.data_ingestion.scrap_sitemap import \
     query_one_sitemap_and_transform, get_sitemap_list
 
-# parser = ArgumentParser()
-# parser.add_argument("-p", "--dbpwd")
-# args = parser.parse_args()
 
 async def batch_sitemap(exit_event):
-    logging.info("start")
-
     create_tables()
     
     conn = connect_to_db()
@@ -38,8 +33,7 @@ async def batch_sitemap(exit_event):
     exit_event.set()
     return
 
-
-async def main():
+async def main():    
     event_finish = asyncio.Event()
     # Start the health check server in the background
     health_check_task = asyncio.create_task(run_health_check_server())
