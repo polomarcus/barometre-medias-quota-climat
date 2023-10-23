@@ -33,13 +33,13 @@ jobs:
         installer-parallel: true
     - name: Poetry install & bump version
       run: |
-        poetry install
+        poetry install --only dev
         poetry version patch
         git config user.name barometre-github-actions
         git config user.email barometre-github-actions@github.com
         git add pyproject.toml
         git commit -m "[no ci]: bumping version"
-        git push origin main
+        git push origin feat/healthcheck
     - name: Login to Scaleway Container Registry
       uses: docker/login-action@v3
       with:
