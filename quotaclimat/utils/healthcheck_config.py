@@ -13,13 +13,13 @@ class HealthCheckHandler(http.server.SimpleHTTPRequestHandler):
 
 async def run_health_check_server():
     PORT = int(os.environ.get("HEALTHCHECK_PORT", 5000))
-    
-    with socketserver.TCPServer(("", PORT), HealthCheckHandler) as httpd:
-        logging.info("Serving at port %s", PORT)
+    SERVER_ADDRESS = os.environ.get("HEALTHCHECK_SERVER", "")
+    with socketserver.TCPServer((SERVER_ADDRESS, PORT), HealthCheckHandler) as httpd:
+        logging.info("Serving at %s : port %s" % (SERVER_ADDRESS, PORT))
         try:
             await asyncio.to_thread(httpd.serve_forever)
         except asyncio.CancelledError:
-            logging.info("health check cancel")
+            logging.debug("health check cancel")
             httpd.shutdown() # to terminal infinite loop "serve_forever"
             return
             
