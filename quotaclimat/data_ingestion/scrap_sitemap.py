@@ -43,7 +43,7 @@ def get_sections_from_url(url, sitemap_config, default_output):
 
     return output
 
-def normalize_section(sections):
+def normalize_section(sections) -> List[str]:
     output = list(filter(lambda x: "article" not in x.lower() and not x.isdigit(), sections))
     output = list(map(lambda item: item.replace("_", "-"), output))
 
@@ -53,7 +53,7 @@ def find_sections(url: str, media: str, sitemap_config) -> List[str]:
     """Find and parse section with url"""
 
     default_output = ["unknown"]
-    logging.info("Url to parse %s from %s" % (url, media))
+    logging.debug("Url to parse %s from %s" % (url, media))
 
     if sitemap_config["regex_section"] is not None:
         try:

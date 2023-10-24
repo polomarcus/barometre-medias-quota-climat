@@ -4,7 +4,7 @@ SITEMAP_CONFIG = {
         "sitemap_url": "https://www.bfmtv.com/sitemap_news.xml",
         "regex_section": r"^https:\/\/www\.bfmtv\.com\/(?P<section>[\/\w-]*)\/.+$",
     },
-    # "lejdd": { # same as lequipe, CSV
+    # "lejdd": { # need custom parsing
     #     "sitemap_index": None,
     #     "sitemap_url": "https://www.lejdd.fr/sitemap.xml?page=1",
     #     "regex_section": r"^https:\/\/www\.lejdd\.fr\/(?P<section>[\/\w-]*)\/.+$",
@@ -329,7 +329,22 @@ SITEMAP_TEST_CONFIG = {
         "sitemap_index": None,
         "sitemap_url": "http://localhost:8000/sitemap_news_figaro_3.xml",
         "regex_section": r"^https:\/\/www\.lefigaro\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    }
+    },
+    "midilibre": {
+        "sitemap_index": None,
+        "sitemap_url": "http://localhost:8000/midilibre_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.midilibre\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "liberation": {
+        "sitemap_index": None,
+        "sitemap_url": "http://localhost:8000/liberation_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.liberation\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "letelegramme": {
+        "sitemap_index": None,
+        "sitemap_url": "http://localhost:8000/letelegramme_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.letelegramme\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
 }
     
 SITEMAP_DOCKER_CONFIG = {
@@ -337,5 +352,20 @@ SITEMAP_DOCKER_CONFIG = {
         "sitemap_index": None,
         "sitemap_url": "http://nginxtest:80/sitemap_news_figaro_3.xml",
         "regex_section": r"^https:\/\/www\.lefigaro\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    }
+    },
+    "midilibre": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/midilibre_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.midilibre\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "liberation": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/liberation_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.liberation\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "letelegramme": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/letelegramme_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.letelegramme\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
 }

@@ -47,7 +47,7 @@ services:
     #entrypoint: ["sleep", "1200"] # use to debug the container if needed
     entrypoint: ["python", "quotaclimat/data_ingestion/ingest_db/ingest_sitemap_in_db.py"]
     environment:
-      ENV: prod
+      ENV: docker
       PYTHONPATH: /app
       POSTGRES_USER: user
       POSTGRES_DB: barometre
@@ -61,8 +61,10 @@ services:
       - ./postgres/:/app/postgres/
       - ./app.py:/app/app.py
     depends_on:
-      - postgres_db
-      - metabase
+      nginxtest:
+        condition: service_healthy
+      postgres_db:
+        condition: service_healthy
 
   streamlit:
     container_name: streamlit
