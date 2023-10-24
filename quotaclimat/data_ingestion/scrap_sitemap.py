@@ -8,7 +8,7 @@ from typing import Dict, List
 import advertools as adv
 import pandas as pd
 
-from quotaclimat.data_ingestion.config_sitmap import (SITEMAP_CONFIG, SITEMAP_TEST_CONFIG, SITEMAP_DOCKER_CONFIG, MEDIA_CONFIG)
+from quotaclimat.data_ingestion.config_sitemap import (SITEMAP_CONFIG, SITEMAP_TEST_CONFIG, SITEMAP_DOCKER_CONFIG, MEDIA_CONFIG)
 from postgres.schemas.models import get_sitemap_cols
 
 
@@ -53,7 +53,7 @@ def find_sections(url: str, media: str, sitemap_config) -> List[str]:
     """Find and parse section with url"""
 
     default_output = ["unknown"]
-    logging.debug("Url to parse %s from %s" % (url, media))
+    logging.info("Url to parse %s from %s" % (url, media))
 
     if sitemap_config["regex_section"] is not None:
         try:
@@ -126,7 +126,7 @@ def query_one_sitemap_and_transform(media: str, sitemap_conf: Dict) -> pd.DataFr
         pd.DataFrame
     """
     try:
-        logging.info("\nParsing %s with %s\n" % (media, sitemap_conf["sitemap_url"]))
+        logging.info("\n\nParsing media %s with %s" % (media, sitemap_conf["sitemap_url"]))
         #@see https://advertools.readthedocs.io/en/master/advertools.sitemaps.html#news-sitemaps
         temp_df = adv.sitemap_to_df(sitemap_conf["sitemap_url"])
         temp_df.rename(columns={"loc": "url"}, inplace=True)
