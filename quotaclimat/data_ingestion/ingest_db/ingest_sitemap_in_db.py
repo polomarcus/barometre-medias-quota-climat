@@ -14,7 +14,7 @@ from quotaclimat.data_ingestion.scrap_sitemap import \
     query_one_sitemap_and_transform, get_sitemap_list
 
 
-def batch_sitemap(exit_event):
+async def batch_sitemap(exit_event):
     create_tables()
     
     conn = connect_to_db()
@@ -24,7 +24,7 @@ def batch_sitemap(exit_event):
         try:
             df = query_one_sitemap_and_transform(media, sitemap_conf)
             df_to_insert = transformation_from_dumps_to_table_entry(df)
-            insert_data_in_sitemap_table(df_to_insert, conn)
+            await asyncio.to_thread(insert_data_in_sitemap_table(df_to_insert, conn))
         except Exception as err:
             logging.error("Could not ingest data in db for media %s:(%s) %s" % (media,type(err).__name__, err))
             continue
@@ -40,12 +40,12 @@ async def main():
     health_check_task = asyncio.create_task(run_health_check_server())
 
     # Start batch job
-    batch_sitemap(event_finish)
+    asyncio.create_task(batch_sitemap(event_finish))
 
     # Wait for both tasks to complete
     await event_finish.wait()
     res=health_check_task.cancel()
-    logging.info("Exiting with success %s", res)
+    logging.info("Exiting with success")
 
     sys.exit(0)
 
