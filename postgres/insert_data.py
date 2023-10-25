@@ -66,7 +66,10 @@ def show_sitemaps_dataframe(df: pd.DataFrame):
 
 def insert_data_in_sitemap_table(df: pd.DataFrame, conn):
     number_of_rows = len(df)
-    logging.info("Received %s elements", number_of_rows)
+    if(number_of_rows == 0):
+        logging.error("0 elements to parse")
+    else:
+        logging.info("Received %s elements", number_of_rows)
 
     # primary key for the DB to avoid duplicate data
     df["id"] = add_primary_key(df)

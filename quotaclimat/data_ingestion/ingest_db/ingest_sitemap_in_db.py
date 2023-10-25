@@ -25,6 +25,9 @@ async def batch_sitemap(exit_event):
             df = query_one_sitemap_and_transform(media, sitemap_conf)
             df_to_insert = transformation_from_dumps_to_table_entry(df)
             await asyncio.to_thread(insert_data_in_sitemap_table(df_to_insert, conn))
+        except TypeError as err:
+            logging.debug("Asyncio error %s" % (err))
+            continue
         except Exception as err:
             logging.error("Could not ingest data in db for media %s:(%s) %s" % (media,type(err).__name__, err))
             continue
