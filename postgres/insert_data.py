@@ -43,7 +43,7 @@ def show_sitemaps_dataframe(df: pd.DataFrame):
 def insert_data_in_sitemap_table(df: pd.DataFrame, conn):
     number_of_rows = len(df)
     if(number_of_rows == 0):
-        logging.error("0 elements to parse")
+        logging.warning("0 elements to parse")
     else:
         logging.info("Received %s elements", number_of_rows)
 

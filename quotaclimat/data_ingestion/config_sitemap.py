@@ -448,109 +448,109 @@ SITEMAP_TEST_CONFIG = {
 }
     
 SITEMAP_DOCKER_CONFIG = {
-    # "ouest-france": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/ouestfrance_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.ouest-france\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
+    "ouest-france": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/ouestfrance_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.ouest-france\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
     "lefigaro": {
         "sitemap_index": None,
         "sitemap_url": "http://nginxtest:80/lefigaro_sitemap.xml",
         "regex_section": r"^https:\/\/www\.lefigaro\.fr\/(?P<section>[\/\w-]*)\/.+$",
     },
-    #  "bfmtv": {
-    #     "sitemap_index": None,
-    #     "sitemap_url" : "http://nginxtest:80/bfmtv_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.bfmtv\.com\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "cnews": {
-    #     "sitemap_index": None,
-    #     "sitemap_url" : "http://nginxtest:80/cnews_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.cnews\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "leparisien": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/leparisien_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.leparisien\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "lexpress": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/lexpress_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.lexpress\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "lepoint": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/lepoint_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.lepoint\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "nicematin": {
-    #     "sitemap_index": None,
-    #     "sitemap_url" : "http://nginxtest:80/nicematin_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.nicematin\.com\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "larepubliquedespyrenees": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/republiquepyrenees_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.larepubliquedespyrenees\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "lamontagne": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/lamontagne_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.lamontagne\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "telerama": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/telerama_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.telerama\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "challenges": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/challenges_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.challenges\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "la-croix": {
-    #     "sitemap_index": None,
-    #     "sitemap_url" :"http://nginxtest:80/lacroix_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.la-croix\.com\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "francetvinfo": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/franceinfo_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.francetvinfo\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "franceinter": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/franceinter_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.radiofrance\.fr\/franceinter\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "midilibre": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/midilibre_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.midilibre\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "liberation": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/liberation_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.liberation\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "letelegramme": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/letelegramme_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.letelegramme\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "francebleu": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/francebleu_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.francebleu\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "nouvelobs": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/nouvelobs_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.nouvelobs\.com\/(?P<section>[\/\w-]*)\/.+$",
-    # },
-    # "mediapart": {
-    #     "sitemap_index": None,
-    #     "sitemap_url": "http://nginxtest:80/mediapart_sitemap.xml",
-    #     "regex_section": r"^https:\/\/www\.mediapart\.fr\/(?P<section>[\/\w-]*)\/.+$",
-    # },
+     "bfmtv": {
+        "sitemap_index": None,
+        "sitemap_url" : "http://nginxtest:80/bfmtv_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.bfmtv\.com\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "cnews": {
+        "sitemap_index": None,
+        "sitemap_url" : "http://nginxtest:80/cnews_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.cnews\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "leparisien": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/leparisien_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.leparisien\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "lexpress": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/lexpress_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.lexpress\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "lepoint": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/lepoint_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.lepoint\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "nicematin": {
+        "sitemap_index": None,
+        "sitemap_url" : "http://nginxtest:80/nicematin_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.nicematin\.com\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "larepubliquedespyrenees": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/republiquepyrenees_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.larepubliquedespyrenees\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "lamontagne": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/lamontagne_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.lamontagne\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "telerama": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/telerama_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.telerama\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "challenges": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/challenges_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.challenges\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "la-croix": {
+        "sitemap_index": None,
+        "sitemap_url" :"http://nginxtest:80/lacroix_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.la-croix\.com\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "francetvinfo": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/franceinfo_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.francetvinfo\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "franceinter": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/franceinter_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.radiofrance\.fr\/franceinter\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "midilibre": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/midilibre_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.midilibre\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "liberation": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/liberation_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.liberation\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "letelegramme": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/letelegramme_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.letelegramme\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "francebleu": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/francebleu_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.francebleu\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "nouvelobs": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/nouvelobs_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.nouvelobs\.com\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "mediapart": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/mediapart_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.mediapart\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
 }
