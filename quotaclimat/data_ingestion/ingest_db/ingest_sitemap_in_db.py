@@ -22,7 +22,7 @@ async def batch_sitemap(exit_event):
     logging.info("Going to parse %s" % (sitemap_list))
     for media, sitemap_conf in sitemap_list:
         try:
-            df = query_one_sitemap_and_transform(media, sitemap_conf)
+            df = await query_one_sitemap_and_transform(media, sitemap_conf) #TODO check me 
             df_to_insert = transformation_from_dumps_to_table_entry(df)
             await asyncio.to_thread(insert_data_in_sitemap_table(df_to_insert, conn))
         except TypeError as err:

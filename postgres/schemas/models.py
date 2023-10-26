@@ -20,7 +20,8 @@ def get_sitemap_cols():
         "section",
         "image_caption",
         "media_type",
-        "url"
+        "url",
+        "news_description",
     ]
     return cols
 

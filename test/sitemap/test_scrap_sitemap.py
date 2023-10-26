@@ -2,7 +2,7 @@ import logging
 
 import numpy as np
 import pandas as pd
-import os 
+import pytest 
 from quotaclimat.data_ingestion.scrap_sitemap import (find_sections, query_one_sitemap_and_transform, get_sections_from_url, normalize_section)
 from quotaclimat.data_ingestion.config_sitemap import (SITEMAP_CONFIG)
 
@@ -26,11 +26,12 @@ def test_get_sitemap_list():
     sitemap_url = sitemap
     sitemap_url == "http://nginxtest:80/sitemap_news_figaro_3.xml"
 
-def test_query_one_sitemap_and_transform():
+@pytest.mark.asyncio
+async def test_query_one_sitemap_and_transform():
     sitemap_config = get_sitemap_list()
 
     media = "lefigaro"
-    output = query_one_sitemap_and_transform(media, sitemap_config[media])
+    output = await query_one_sitemap_and_transform(media, sitemap_config[media])
 
     expected_result = pd.DataFrame([{
         "url" :"http://nginxtest:80/mediapart_website.html", #TODO only for on docker test for now - see @mock/lefigaro_sitemap.xml
