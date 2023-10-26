@@ -50,8 +50,6 @@ jobs:
         run: poetry install
       - name: docker compose up nginx
         run: docker compose up -d nginxtest
-      - name: docker logs nginx
-        run: docker logs nginxtest
       - name: pytest run
         run: "poetry run pytest --cov test test/"
         env:
