@@ -10,7 +10,7 @@ import pandas as pd
 
 from quotaclimat.data_ingestion.config_sitemap import (SITEMAP_CONFIG, SITEMAP_TEST_CONFIG, SITEMAP_DOCKER_CONFIG, MEDIA_CONFIG)
 from postgres.schemas.models import get_sitemap_cols
-
+from quotaclimat.data_ingestion.scrap_html.scrap_description_article import get_meta_description
 
 # TODO: silence advertools loggings
 # TODO: add slack login
@@ -116,6 +116,16 @@ def clean_surrounding_whitespaces_df(df: pd.DataFrame) -> pd.DataFrame:
     return df.applymap(clean_surrounding_whitespaces_str)
 
 
+def add_news_description(df: pd.DataFrame):
+    try:
+        logging.info("")
+        return (
+            df["url"]
+        ).apply(get_meta_description)
+    except (Exception) as error:
+        logging.warning(error)
+        return ""
+
 def query_one_sitemap_and_transform(media: str, sitemap_conf: Dict) -> pd.DataFrame:
     """Query a site map url from media_conf and tranform it as pd.DataFrame
 
@@ -147,6 +157,10 @@ def query_one_sitemap_and_transform(media: str, sitemap_conf: Dict) -> pd.DataFr
 
         df = clean_surrounding_whitespaces_df(df)
         df = df.drop(columns=["etag", "sitemap_size_mb", "news", "news_publication", "image"], errors='ignore')
+
+        #TODO only parse one a article
+        # need to load recents article first and do a diff ?
+        df["news_description"] = add_news_description(df)
 
         return df
     except Exception as err:

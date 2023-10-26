@@ -33,7 +33,7 @@ def test_query_one_sitemap_and_transform():
     output = query_one_sitemap_and_transform(media, sitemap_config[media])
 
     expected_result = pd.DataFrame([{
-        "url" :"https://www.lefigaro.fr/international/en-direct-conflit-hamas-israel-l-etat-hebreu-poursuit-son-pilonnage-de-la-bande-de-gaza-en-promettant-de-detruire-le-hamas-20231012",
+        "url" :"http://nginxtest:80/mediapart_website.html", #TODO only for on docker test for now - see @mock/lefigaro_sitemap.xml
         "lastmod" :pd.Timestamp("2023-10-12 15:34:28"),
         "publication_name" :"Le Figaro",
         "publication_language" :"fr",
@@ -46,9 +46,10 @@ def test_query_one_sitemap_and_transform():
         "sitemap" :sitemap_config[media]["sitemap_url"],
         "sitemap_last_modified" :pd.Timestamp("2023-10-12 15:52:41+00:00"),
         "download_date": pd.Timestamp.now(),
-        "section" :["international"],
+        "section" :["unknown"],
         "media_type" :"webpress",
-        "media":"lefigaro"
+        "media":"lefigaro",
+        "news_description": "description could be parsed with success",
     }])
 
     # warning : hard to compare almost the same timestamp

@@ -18,7 +18,7 @@ async def batch_sitemap(exit_event):
     create_tables()
     
     conn = connect_to_db()
-    sitemap_list = get_sitemap_list().items()   
+    sitemap_list = get_sitemap_list().items() 
     logging.info("Going to parse %s" % (sitemap_list))
     for media, sitemap_conf in sitemap_list:
         try:

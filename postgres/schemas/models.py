@@ -41,6 +41,7 @@ class Sitemap(Base):
     image_caption = Column(Text)
     media_type = Column(Text)
     url = Column(Text)
+    news_description= Column(Text) # ALTER TABLE sitemap_table add news_description text;
     updated_on = Column(DateTime(), default=datetime.now, onupdate=datetime.now)
 
 

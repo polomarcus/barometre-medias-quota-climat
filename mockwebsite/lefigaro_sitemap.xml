@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
             <url>
-            <loc>https://www.lefigaro.fr/international/en-direct-conflit-hamas-israel-l-etat-hebreu-poursuit-son-pilonnage-de-la-bande-de-gaza-en-promettant-de-detruire-le-hamas-20231012</loc>
+            <loc>http://nginxtest:80/mediapart_website.html</loc>
             <lastmod>2023-10-12T17:34:28+02:00</lastmod>
             <news:news>
                 <news:publication>

@@ -122,6 +122,7 @@ def test_insert_data_in_sitemap_table():
                 "image_caption": "testimage_caption",
                 "media_type": "testmedia_type",
                 "url": "testurl",
+                "news_description": "description",
             }
         ]
     )
@@ -142,6 +143,7 @@ def test_insert_data_in_sitemap_table():
     assert result.image_caption == "testimage_caption"
     assert result.media_type == "testmedia_type"
     assert result.url == "testurl"
+    assert result.news_description == "description"
 
 def test_clean_data():
     df_wrong_format = pd.DataFrame([{"id": "empty"}])
