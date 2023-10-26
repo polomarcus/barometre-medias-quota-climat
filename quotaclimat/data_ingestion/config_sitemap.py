@@ -427,7 +427,7 @@ SITEMAP_TEST_CONFIG = {
     },
     "lefigaro": {
         "sitemap_index": None,
-        "sitemap_url": "http://localhost:8000/lefigaro_sitemap.xml",
+        "sitemap_url": "http://localhost:8000/lefigaro_localhost_sitemap.xml",
         "regex_section": r"^https:\/\/www\.lefigaro\.fr\/(?P<section>[\/\w-]*)\/.+$",
     },
     "midilibre": {
