@@ -34,18 +34,6 @@ jobs:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
 
-      nginxtest: # to test locally webpages
-        image: nginx:latest
-        healthcheck:
-          test: ["CMD", "service", "nginx", "status"]
-          interval: 5s
-          timeout: 5s
-          retries: 5
-        ports:
-          - 8000:80
-        volumes:
-          - './mockwebsite:/usr/share/nginx/html'
-
     steps:
       - uses: actions/setup-python@v4
         with:
