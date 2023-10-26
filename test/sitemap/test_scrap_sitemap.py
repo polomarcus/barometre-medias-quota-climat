@@ -2,7 +2,8 @@ import logging
 
 import numpy as np
 import pandas as pd
-import pytest 
+import pytest
+import os 
 from quotaclimat.data_ingestion.scrap_sitemap import (find_sections, query_one_sitemap_and_transform, get_sections_from_url, normalize_section)
 from quotaclimat.data_ingestion.config_sitemap import (SITEMAP_CONFIG)
 
@@ -31,10 +32,15 @@ async def test_query_one_sitemap_and_transform():
     sitemap_config = get_sitemap_list()
 
     media = "lefigaro"
+    url_to_parse = ""
+    if(os.environ.get("ENV") == "docker"):
+        url_to_parse ="http://nginxtest:80/mediapart_website.html"
+    else:
+        url_to_parse = "http:/localhost:8000/mediapart_website.html"
     output = await query_one_sitemap_and_transform(media, sitemap_config[media])
 
     expected_result = pd.DataFrame([{
-        "url" :"http://nginxtest:80/mediapart_website.html", #TODO only for on docker test for now - see @mock/lefigaro_sitemap.xml
+        "url" :url_to_parse,
         "lastmod" :pd.Timestamp("2023-10-12 15:34:28"),
         "publication_name" :"Le Figaro",
         "publication_language" :"fr",
