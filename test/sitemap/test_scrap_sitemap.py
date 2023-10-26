@@ -36,7 +36,7 @@ async def test_query_one_sitemap_and_transform():
     if(os.environ.get("ENV") == "docker"):
         url_to_parse ="http://nginxtest:80/mediapart_website.html"
     else:
-        url_to_parse = "http:/localhost:8000/mediapart_website.html"
+        url_to_parse = "http://localhost:8000/mediapart_website.html"
     output = await query_one_sitemap_and_transform(media, sitemap_config[media])
 
     expected_result = pd.DataFrame([{
