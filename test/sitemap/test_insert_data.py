@@ -3,11 +3,10 @@ import logging
 import pandas as pd
 
 
-from postgres.insert_data import (add_primary_key, clean_data,
-                                  insert_data_in_sitemap_table,get_consistent_hash)
+from postgres.insert_data import (clean_data,
+                                  insert_data_in_sitemap_table)
+from quotaclimat.data_ingestion.scrap_sitemap import (add_primary_key, get_consistent_hash)
 
-
-                                 
 from postgres.insert_existing_data_example import (
     parse_section, transformation_from_dumps_to_table_entry)
 from postgres.schemas.models import create_tables, get_sitemap, connect_to_db
@@ -70,6 +69,7 @@ def test_transformation_from_dumps_to_table_entry():
                 "media_type": "testmedia_type",
                 "url": "my_awesome_url",
                 "news_description": "description could be parsed with success",
+                "id": get_consistent_hash("testpublication_name" + "testnews_title"),
             }
         ]
     )
@@ -99,6 +99,7 @@ def test_transformation_from_dumps_to_table_entry():
                 "media": "testmedia",
                 "lastmod": pd.Timestamp("2023-10-11 13:10:00"),
                 "news_description": "description could be parsed with success",
+                "id": get_consistent_hash("testpublication_name" + "testnews_title"),
             }
         ]
     )
@@ -124,6 +125,7 @@ def test_insert_data_in_sitemap_table():
                 "image_caption": "testimage_caption",
                 "media_type": "testmedia_type",
                 "url": "testurl",
+                "id": get_consistent_hash("testpublication_name" + "testnews_title"),
                 "news_description": "description",
             }
         ]

@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 import os 
-from quotaclimat.data_ingestion.scrap_sitemap import (find_sections, query_one_sitemap_and_transform, get_sections_from_url, normalize_section)
+from quotaclimat.data_ingestion.scrap_sitemap import (find_sections, get_consistent_hash, get_diff_from_df, query_one_sitemap_and_transform, get_sections_from_url, normalize_section)
 from quotaclimat.data_ingestion.config_sitemap import (SITEMAP_CONFIG)
 
 from quotaclimat.data_ingestion.ingest_db.ingest_sitemap_in_db import get_sitemap_list
@@ -30,15 +30,21 @@ def test_get_sitemap_list():
 @pytest.mark.asyncio
 async def test_query_one_sitemap_and_transform():
     sitemap_config = get_sitemap_list()
-
+    pg_df =pd.DataFrame(
+        [
+            {
+                "id": "unknown"
+            }
+        ]
+    )
     media = "lefigaro"
     url_to_parse = ""
     if(os.environ.get("ENV") == "docker"):
         url_to_parse ="http://nginxtest:80/mediapart_website.html"
     else:
         url_to_parse = "http://localhost:8000/mediapart_website.html"
-    output = await query_one_sitemap_and_transform(media, sitemap_config[media])
-
+    output = await query_one_sitemap_and_transform(media, sitemap_config[media], pg_df)
+    logging.info("Schema before saving\n%s", output.dtypes)
     expected_result = pd.DataFrame([{
         "url" :url_to_parse,
         "lastmod" :pd.Timestamp("2023-10-12 15:34:28"),
@@ -56,8 +62,9 @@ async def test_query_one_sitemap_and_transform():
         "section" :["unknown"],
         "media_type" :"webpress",
         "news_description": "description could be parsed with success",
+        "id": get_consistent_hash("Le Figaro" + "EN DIRECT - Conflit Hamas-Israël : l’armée israélienne dit avoir frappé Gaza avec 4000 tonnes d’explosifs depuis samedi"),
         "media":"lefigaro",
-    }])
+        }])
 
     # warning : hard to compare almost the same timestamp
     expected_result['download_date'] = output['download_date']
@@ -95,3 +102,25 @@ def test_find_sections():
 
     url_laprovence = "https://www.laprovence.com/article/sports/6599160924963815/coupe-du-monde-de-rugby-antoine-dupont-larbitrage-na-pas-ete-a-la-hauteu"
     assert find_sections(url_laprovence, "laprovence", sitemap_config["laprovence"]) == ["sports"]
+
+def test_get_diff_from_df():
+    df = pd.DataFrame([{
+        "id": "id_unknown"
+    },{
+        "id": "id2"
+    },{
+        "id": "id1"
+    }])
+
+    df_pg = pd.DataFrame([{
+        "id": "id1"
+    },{
+        "id": "id2"
+    }])
+
+    expected = pd.DataFrame([{
+        "id": "id_unknown"
+    }])
+    output = get_diff_from_df(df, df_pg)
+
+    pd.testing.assert_frame_equal(output, expected)

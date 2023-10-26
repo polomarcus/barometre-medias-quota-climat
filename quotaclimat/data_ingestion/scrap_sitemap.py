@@ -12,6 +12,8 @@ from quotaclimat.data_ingestion.config_sitemap import (SITEMAP_CONFIG, SITEMAP_T
 from postgres.schemas.models import get_sitemap_cols
 from quotaclimat.data_ingestion.scrap_html.scrap_description_article import get_meta_description
 import asyncio
+import hashlib
+
 # TODO: silence advertools loggings
 # TODO: add slack login
 # TODO: add data models
@@ -123,7 +125,33 @@ async def add_news_description(url: str, media:str):
         logging.warning(error)
         return ""
 
-async def query_one_sitemap_and_transform(media: str, sitemap_conf: Dict) -> pd.DataFrame:
+
+def get_consistent_hash(my_pk):
+    # Convert the object to a string representation
+    obj_str = str(my_pk)
+    sha256 = hashlib.sha256()
+    # Update the hash object with the object's string representation
+    sha256.update(obj_str.encode('utf-8'))
+    hash_value = sha256.hexdigest()
+
+    return hash_value
+
+
+# hash of publication name + title 
+def add_primary_key(df):
+    try:
+        return (
+            df["publication_name"]
+            + df["news_title"]
+        ).apply(get_consistent_hash)
+    except (Exception) as error:
+        logging.warning(error)
+        return get_consistent_hash("empty") #  TODO improve - should be a None ?
+        
+def get_diff_from_df(df, df_from_pg):
+    return df[~df['id'].isin(df_from_pg['id'])]
+
+async def query_one_sitemap_and_transform(media: str, sitemap_conf: Dict, df_from_pg) -> pd.DataFrame:
     """Query a site map url from media_conf and tranform it as pd.DataFrame
 
     Args:
@@ -154,11 +182,17 @@ async def query_one_sitemap_and_transform(media: str, sitemap_conf: Dict) -> pd.
 
         df = clean_surrounding_whitespaces_df(df)
         df = df.drop(columns=["etag", "sitemap_size_mb", "news", "news_publication", "image"], errors='ignore')
+        
+        # primary key for the DB to avoid duplicate data
+        df["id"] = add_primary_key(df)
 
+        #keep only unknown id to not parse every website for new_description
+        difference_df = get_diff_from_df(df, df_from_pg)
+        logging.info(f"Number of new sitemap to save (compared to already saved in PG): {len(difference_df)}")
         # concurrency : https://stackoverflow.com/a/67944888/3535853
-        df["news_description"] = await asyncio.gather(*(add_news_description(v, media) for v in df['url']))
+        difference_df["news_description"] = await asyncio.gather(*(add_news_description(v, media) for v in difference_df['url']))
 
-        return df
+        return difference_df
     except Exception as err:
         logging.error(
             "Sitemap query error for %s: %s does not match regexp : %s"
