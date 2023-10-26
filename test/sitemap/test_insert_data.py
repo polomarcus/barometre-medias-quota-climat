@@ -112,7 +112,7 @@ def test_transformation_from_dumps_to_table_entry():
 def test_insert_data_in_sitemap_table():
     create_tables()
     conn = connect_to_db()
-
+    primary_key = get_consistent_hash("testpublication_name_new" + "testnews_title")
     df = pd.DataFrame(
         [
             {
@@ -125,7 +125,7 @@ def test_insert_data_in_sitemap_table():
                 "image_caption": "testimage_caption",
                 "media_type": "testmedia_type",
                 "url": "testurl",
-                "id": get_consistent_hash("testpublication_name" + "testnews_title"),
+                "id": primary_key,
                 "news_description": "description",
             }
         ]
@@ -134,7 +134,6 @@ def test_insert_data_in_sitemap_table():
     insert_data_in_sitemap_table(df, conn)
 
     # check the value is well existing
-    primary_key = get_consistent_hash("testpublication_name_newtestnews_title")
     result = get_sitemap(primary_key)
 
     assert result.id == primary_key
