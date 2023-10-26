@@ -43,8 +43,8 @@ jobs:
           retries: 5
         ports:
           - 8000:80
-    volumes:
-      - './mockwebsite:/usr/share/nginx/html'
+        volumes:
+          - './mockwebsite:/usr/share/nginx/html'
 
     steps:
       - uses: actions/setup-python@v4
