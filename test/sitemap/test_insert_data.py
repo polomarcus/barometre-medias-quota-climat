@@ -68,7 +68,8 @@ def test_transformation_from_dumps_to_table_entry():
                 "section": "testsection",
                 "image_caption": "testimage_caption",
                 "media_type": "testmedia_type",
-                "url": "testurl",
+                "url": "my_awesome_url",
+                "news_description": "description could be parsed with success",
             }
         ]
     )
@@ -77,7 +78,7 @@ def test_transformation_from_dumps_to_table_entry():
     df = pd.DataFrame(
         [
             {
-                "url": "testurl",
+                "url": "my_awesome_url",
                 "news": "testnews",
                 "news_publication": "testnews_publication",
                 "publication_name": "testpublication_name",
@@ -97,6 +98,7 @@ def test_transformation_from_dumps_to_table_entry():
                 "media_type": "testmedia_type",
                 "media": "testmedia",
                 "lastmod": pd.Timestamp("2023-10-11 13:10:00"),
+                "news_description": "description could be parsed with success",
             }
         ]
     )

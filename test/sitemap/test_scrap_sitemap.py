@@ -49,8 +49,8 @@ async def test_query_one_sitemap_and_transform():
         "download_date": pd.Timestamp.now(),
         "section" :["unknown"],
         "media_type" :"webpress",
-        "media":"lefigaro",
         "news_description": "description could be parsed with success",
+        "media":"lefigaro",
     }])
 
     # warning : hard to compare almost the same timestamp
