@@ -10,6 +10,14 @@ async def get_url_content(url_article: str):
         async with session.get(url_article, headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36"}) as response:
             return await response.text()
 
+def get_hat_20minutes(soup):
+    hat = soup.select_one(".hat-summary").text
+    if hat is not None:
+        return hat
+    else:
+        logging.warning("could not get hat")
+        return ""
+
 # get https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
 async def get_meta_description(url_article, media) -> str:
     if(media != "ouest-france"):
@@ -22,6 +30,8 @@ async def get_meta_description(url_article, media) -> str:
         description = soup.find(name="meta", attrs={'name': 'description'}).get("content")
         logging.debug(f"description for {url_article} is \n {description}")
         return description
+    elif media == "20_minutes": # does not have meta description
+        return get_hat_20minutes(soup)
     else:
         logging.warning(f"could not find description for {url_article}")
 

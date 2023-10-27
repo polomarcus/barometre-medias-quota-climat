@@ -445,6 +445,11 @@ SITEMAP_TEST_CONFIG = {
         "sitemap_url": "http://localhost:8000/letelegramme_sitemap.xml",
         "regex_section": r"^https:\/\/www\.letelegramme\.fr\/(?P<section>[\/\w-]*)\/.+$",
     },
+    "20_minutes": {
+        "sitemap_index": None,
+        "sitemap_url": "http://localhost:8000/20minutes_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.20minutes\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
 }
     
 SITEMAP_DOCKER_CONFIG = {
@@ -552,5 +557,10 @@ SITEMAP_DOCKER_CONFIG = {
         "sitemap_index": None,
         "sitemap_url": "http://nginxtest:80/mediapart_sitemap.xml",
         "regex_section": r"^https:\/\/www\.mediapart\.fr\/(?P<section>[\/\w-]*)\/.+$",
+    },
+    "20_minutes": {
+        "sitemap_index": None,
+        "sitemap_url": "http://nginxtest:80/20minutes_sitemap.xml",
+        "regex_section": r"^https:\/\/www\.20minutes\.fr\/(?P<section>[\/\w-]*)\/.+$",
     },
 }
