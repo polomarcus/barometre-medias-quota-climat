@@ -5,12 +5,12 @@ SITEMAP_CONFIG = {
         "regex_section": r"^https:\/\/www\.bfmtv\.com\/(?P<section>[\/\w-]*)\/.+$",
         "filter_date_label": "lastmod",
     },
-    "lejdd": { # need custom parsing as sitemap is missing a lot of attributes
-        "sitemap_index": None,
-        "sitemap_url": "https://www.lejdd.fr/sitemap.xml",
-        "regex_section": r"^https:\/\/www\.lejdd\.fr\/(?P<section>[\/\w]*)\/.+$",
-        "filter_date_label": "lastmod",
-    },
+    # "lejdd": { # need custom parsing as sitemap is missing a lot of attributes
+    #     "sitemap_index": None,
+    #     "sitemap_url": "https://www.lejdd.fr/sitemap.xml",
+    #     "regex_section": r"^https:\/\/www\.lejdd\.fr\/(?P<section>[\/\w]*)\/.+$",
+    #     "filter_date_label": "lastmod",
+    # },
     "cnews": {
         "sitemap_index": None,
         "sitemap_url": "https://www.cnews.fr/googlenews.xml",

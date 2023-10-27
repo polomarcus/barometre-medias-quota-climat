@@ -214,7 +214,8 @@ async def query_one_sitemap_and_transform(media: str, sitemap_conf: Dict, df_fro
         difference_df = get_diff_from_df(df, df_from_pg)
         
         # concurrency : https://stackoverflow.com/a/67944888/3535853
-        difference_df['news_description']  = await asyncio.gather(*(add_news_meta(row["url"], media, row["news_title"]) for (_, row) in difference_df.iterrows()))
+        # https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+        difference_df['news_description'] = await asyncio.gather(*(add_news_meta(row["url"], media, row["news_title"]) for (_, row) in difference_df.iterrows()))
 
         return difference_df
     except Exception as err:

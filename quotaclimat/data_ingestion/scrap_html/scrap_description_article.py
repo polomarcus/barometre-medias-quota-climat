@@ -38,7 +38,9 @@ async def get_meta_news(url_article, media):
         logging.debug(f"description for {url_article} is \n {description}")
         result["description"] = description
     elif media == "20_minutes": # does not have meta description
-        result["description"] = get_hat_20minutes(soup)
+        hat = get_hat_20minutes(soup)
+        logging.info(f"reading hat for {media} - {hat}")
+        result["description"] = hat
     else:
         logging.warning(f"could not find description for {url_article}")
 
