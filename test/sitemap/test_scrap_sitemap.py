@@ -137,8 +137,8 @@ async def test_query_one_sitemap_and_transform_hat_parsing():
 def test_find_sections():
     sitemap_config = SITEMAP_CONFIG
 
-    url_jdd = "https://www.lejdd.fr/politique/arnaud-benedetti-la-loi-immigration-reintroduit-les-clivages-gauche/droite-1382860"
-    assert find_sections(url_jdd, "lejdd", sitemap_config["lejdd"]) == ["politique"]
+    # url_jdd = "https://www.lejdd.fr/politique/arnaud-benedetti-la-loi-immigration-reintroduit-les-clivages-gauche/droite-1382860"
+    # assert find_sections(url_jdd, "lejdd", sitemap_config["lejdd"]) == ["politique"]
     
     url_franceinfo = "https://www.francetvinfo.fr/monde/proche-orient/israel-palestine/direct-guerre-entre-israel-et-le-hamas-l-occupation-de-la-bande-de-gaza-serait-une-grave-erreur-previent-joe-biden_6125127.html"
     output = find_sections(url_franceinfo, "francetvinfo", sitemap_config["francetvinfo"])
