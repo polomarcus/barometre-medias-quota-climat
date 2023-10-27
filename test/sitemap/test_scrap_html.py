@@ -1,7 +1,7 @@
 import logging
 import pytest
 import os
-from quotaclimat.data_ingestion.scrap_html.scrap_description_article import get_meta_description, get_hat_20minutes, get_url_content
+from quotaclimat.data_ingestion.scrap_html.scrap_description_article import get_meta_news, get_hat_20minutes, get_url_content
 from bs4 import BeautifulSoup
 
 localhost = ""
@@ -11,11 +11,11 @@ else:
     localhost = "http://localhost:8000"
 
 @pytest.mark.asyncio
-async def test_get_meta_description():
+async def test_get_meta_news():
     url_to_parse = f"{localhost}/mediapart_website.html"
 
-    ouput = await get_meta_description(url_to_parse, "media")
-    assert ouput == "description could be parsed with success"
+    ouput = await get_meta_news(url_to_parse, "media")
+    assert ouput["description"] == "description could be parsed with success"
 
 @pytest.mark.asyncio
 async def test_get_hat_20minutes():

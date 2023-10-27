@@ -21,7 +21,7 @@ def test_add_primary_key():
         [
             {
                 "publication_name": "testpublication_name",
-                "news_title": "testnews_title",
+                "news_title": "title",
                 "news_publication_date": pd.Timestamp("2023-10-11 13:10:00"),
             }
         ]
@@ -31,9 +31,9 @@ def test_add_primary_key():
         [
             {
                 "publication_name": "testpublication_name",
-                "news_title": "testnews_title",
+                "news_title": "title",
                 "news_publication_date": pd.Timestamp("2023-10-11 13:10:00"),
-                "id": get_consistent_hash("testpublication_name" + "testnews_title"),
+                "id": get_consistent_hash("testpublication_name" + "title"),
             }
         ]
     )
@@ -112,19 +112,21 @@ def test_transformation_from_dumps_to_table_entry():
 def test_insert_data_in_sitemap_table():
     create_tables()
     conn = connect_to_db()
-    primary_key = get_consistent_hash("testpublication_name_new" + "testnews_title")
+    url = "my_awesome_url"
+    title = "testnews_title"
+    primary_key = get_consistent_hash("testpublication_name_new" + title)
     df = pd.DataFrame(
         [
             {
                 "publication_name": "testpublication_name_new",
-                "news_title": "testnews_title",
+                "news_title": title,
                 "download_date": pd.Timestamp("2023-10-11 13:11:00"),
                 "news_publication_date": pd.Timestamp("2023-10-11 13:10:00"),
                 "news_keywords": "testnews_keywords",
                 "section": "sport",
                 "image_caption": "testimage_caption",
                 "media_type": "testmedia_type",
-                "url": "testurl",
+                "url": url,
                 "id": primary_key,
                 "news_description": "description",
             }
@@ -138,14 +140,14 @@ def test_insert_data_in_sitemap_table():
 
     assert result.id == primary_key
     assert result.publication_name == "testpublication_name_new"
-    assert result.news_title == "testnews_title"
+    assert result.news_title == title
     assert result.download_date == pd.Timestamp("2023-10-11 13:11:00")
     assert result.news_publication_date == pd.Timestamp("2023-10-11 13:10:00")
     assert result.news_keywords == "testnews_keywords"
     assert result.section == "sport"
     assert result.image_caption == "testimage_caption"
     assert result.media_type == "testmedia_type"
-    assert result.url == "testurl"
+    assert result.url == url
     assert result.news_description == "description"
 
 def test_clean_data():
