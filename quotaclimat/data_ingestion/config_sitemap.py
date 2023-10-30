@@ -107,6 +107,18 @@ SITEMAP_CONFIG = {
         "regex_section": r"^https:\/\/www\.tf1info\.fr\/(?P<section>[\/\w-]*)\/.+$",
         "filter_date_label": "lastmod",
     },
+    "france24": {
+        "sitemap_index": None,
+        "sitemap_url": "https://www.france24.com/sitemaps/fr/news.xml",
+        "regex_section": r"^https:\/\/www\.france24\.com\/(?P<section>[\/\w-]*)\/.+$",
+        "filter_date_label": "news_publication_date",
+    },
+    "m6": {
+        "sitemap_index": None,
+        "sitemap_url": "https://www.6play.fr/sitemap-googlenews.xml",
+        "regex_section": r"^https:\/\/www\.6play\.fr\/(?P<section>[\/\w-]*)\/.+$",
+        "filter_date_label": "news_publication_date",
+    },
     "franceinter": {
         "sitemap_index": None,
         "sitemap_url": "https://www.radiofrance.fr/franceinter/sitemap-news.xml",
@@ -320,6 +332,16 @@ MEDIA_CONFIG = {
     },
     "tf1info": {
         "site_url": "https://www.tf1info.fr/",
+        "type": "tv",
+        "coverage": "national",
+    },
+    "france24": {
+        "site_url": "https://www.france24.com/",
+        "type": "tv",
+        "coverage": "national",
+    },
+    "m6": {
+        "site_url": "https://www.6play.fr/",
         "type": "tv",
         "coverage": "national",
     },
