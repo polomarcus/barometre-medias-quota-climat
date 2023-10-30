@@ -101,6 +101,12 @@ SITEMAP_CONFIG = {
         "regex_section": r"^https:\/\/www\.francetvinfo\.fr\/(?P<section>[\/\w-]*)\/.+$",
         "filter_date_label": "news_publication_date",
     },
+    "tf1info": {
+        "sitemap_index": None,
+        "sitemap_url": "https://www.tf1info.fr/sitemap-n.xml",
+        "regex_section": r"^https:\/\/www\.tf1info\.fr\/(?P<section>[\/\w-]*)\/.+$",
+        "filter_date_label": "lastmod",
+    },
     "franceinter": {
         "sitemap_index": None,
         "sitemap_url": "https://www.radiofrance.fr/franceinter/sitemap-news.xml",
@@ -309,6 +315,11 @@ MEDIA_CONFIG = {
     },
     "francetvinfo": {
         "site_url": "https://www.francetvinfo.fr/",
+        "type": "tv",
+        "coverage": "national",
+    },
+    "tf1info": {
+        "site_url": "https://www.tf1info.fr/",
         "type": "tv",
         "coverage": "national",
     },
