@@ -10,7 +10,7 @@ import pandas as pd
 
 from quotaclimat.data_ingestion.config_sitemap import (SITEMAP_CONFIG, SITEMAP_TEST_CONFIG, SITEMAP_DOCKER_CONFIG, MEDIA_CONFIG)
 from postgres.schemas.models import get_sitemap_cols
-from quotaclimat.data_ingestion.scrap_html.scrap_description_article import get_meta_news
+from quotaclimat.data_ingestion.scrap_html.scrap_description_article import get_meta_news, agent
 import asyncio
 import hashlib
 
@@ -180,8 +180,9 @@ async def query_one_sitemap_and_transform(media: str, sitemap_conf: Dict, df_fro
     """
     try:
         logging.info("\n\nParsing media %s with %s" % (media, sitemap_conf["sitemap_url"]))
+        logging.info(f"User-agent: { agent['User-Agent'] }")
         #@see https://advertools.readthedocs.io/en/master/advertools.sitemaps.html#news-sitemaps
-
+        adv.sitemaps.headers['User-Agent'] = agent["User-Agent"]
         temp_df = adv.sitemap_to_df(sitemap_conf["sitemap_url"])
   
         temp_df.rename(columns={"loc": "url"}, inplace=True)
